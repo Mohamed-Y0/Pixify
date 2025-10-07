@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const jakaraSans = localFont({
+  src: [
+    {
+      path: "./fonts/PlusJakartaSans-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-jakaraSans",
 });
 
 export const metadata: Metadata = {
-  title: "Crasher",
+  title: "Crusher",
   description: "SOON ..",
 };
 
@@ -26,10 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased container m-auto`}
+        className={`${jakaraSans.className} !bg-bg-color container m-auto !text-white antialiased`}
       >
-        <Header />
-        {children}
+        <div className="flex h-screen flex-col">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <p className="text-gray7 py-4 text-center tracking-wider">
+            Created By Mohamed Ahmed
+          </p>
+        </div>
       </body>
     </html>
   );
