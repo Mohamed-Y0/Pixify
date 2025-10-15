@@ -8,11 +8,12 @@
   --color-gray2: #6b6d7a;
   --color-gray3: #1e222d;
   --color-gray4: #5a5b62;
-  --color-green1: #2d2f39;
-  --color-blue1: #4000ff;
-  --color-gray5: #44464f;
-  --color-gray6: #9e9fa2;
-  --color-gray7: #a1a9b0;
+  --color-gray5: #2d2f39;
+  --color-blue1: #002855;
+  --color-blue-hover: #023e7d;
+  --color-gray6: #44464f;
+  --color-gray7: #9e9fa2;
+  --color-gray8: #a1a9b0;
   --color-grayTransparent: #b0b2bc80;
 }
 
