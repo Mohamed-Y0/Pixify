@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dispatch, SetStateAction } from "react";
@@ -10,6 +12,7 @@ type Props = {
 function CardOptions({ quality, onQualityChange }: Props) {
   return (
     <div className="flex w-20 flex-col items-center gap-2.5">
+      {/* - Quality Control - */}
       <Label htmlFor="quality">Quality</Label>
       <Input
         type="number"
