@@ -1,4 +1,4 @@
-import { qualityToPngLevel } from "@/lib/qualityToPngLevel";
+import { qualityToPngLevel } from "@/utils/qualityToPngLevel";
 import sharp from "sharp";
 
 export async function compressImage(
