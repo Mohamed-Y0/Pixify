@@ -1,18 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import CompressButton from "@/components/CompressButton";
 import UploadArea from "@/components/UploadArea";
 import UploadedPreview from "@/components/UploadedPreview";
 import { useState, useEffect } from "react";
+import CardOptions from "@/components/CardOptions";
 
 function UploadingCard() {
   const [file, setFile] = useState<File | null>(null);
+  const [quality, setQuality] = useState<number>(75);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,15 +28,6 @@ function UploadingCard() {
     setImageUrl(null);
   };
 
-  const handleUpload = () => {
-    if (!file) return alert("Please choose a file first!");
-    const formData = new FormData();
-    console.log(file.name);
-    console.log(file.type);
-    formData.append("file", file);
-    console.log(formData);
-  };
-
   return (
     <div className="flex justify-center text-sm md:text-lg">
       <Card className="bg-gray5 w-full max-w-2xl divide-red-50 border-0">
@@ -49,24 +37,18 @@ function UploadingCard() {
           <UploadArea onChangeFile={setFile} />
 
           {imageUrl && (
-            <UploadedPreview
-              imageUrl={imageUrl}
-              file={file}
-              onRemove={handleRemoveImage}
-            />
+            <div className="flex items-center justify-between gap-8">
+              <UploadedPreview
+                imageUrl={imageUrl}
+                file={file}
+                onRemove={handleRemoveImage}
+              />
+              <CardOptions quality={quality} onQualityChange={setQuality} />
+            </div>
           )}
         </CardContent>
 
-        <CardFooter>
-          <div className="border-gray2 w-full border-t pt-5 text-end">
-            <Button
-              onClick={handleUpload}
-              className="bg-blue1 hover:bg-blue-hover cursor-pointer p-6 tracking-wider"
-            >
-              Compress
-            </Button>
-          </div>
-        </CardFooter>
+        <CompressButton file={file} quality={quality} />
       </Card>
     </div>
   );
