@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
+import useCompress from "@/hooks/useCompress";
 
 type Props = {
   file: File | null;
@@ -8,43 +8,23 @@ type Props = {
 };
 
 function CompressButton({ file, quality }: Props) {
-  const [compressedUrl, setCompressedUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (compressedUrl) URL.revokeObjectURL(compressedUrl);
-    };
-  }, [compressedUrl]);
-
-  const handleUpload = async () => {
-    if (!file) return alert("Please choose a file first!");
-
-    const imageData = new FormData();
-    imageData.append("file", file);
-    imageData.append("quality", String(quality));
-
-    const response = await fetch("/api/compress", {
-      method: "POST",
-      body: imageData,
-    });
-
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    setCompressedUrl(url);
-  };
+  const { compressedUrl, loading, error, compress } = useCompress();
 
   return (
     <>
       <CardFooter>
         <div className="border-gray2 w-full border-t pt-5 text-end">
           <Button
-            onClick={handleUpload}
+            disabled={loading || !file}
+            onClick={() => file && compress(file, quality)}
             className="bg-blue1 hover:bg-blue-hover cursor-pointer p-6 tracking-wider"
           >
-            Compress
+            {loading ? "Compressing..." : "Compress"}
           </Button>
         </div>
       </CardFooter>
+
+      {error && <p className="mt-3 text-center text-red-500">{error}</p>}
 
       {compressedUrl && (
         <div className="mt-5 flex justify-center">
