@@ -4,7 +4,7 @@ import Link from "next/link";
 function Header() {
   return (
     <div className="">
-      <header className="flex items-center justify-between border-b border-b-[#2D2F39] px-2.5 py-4">
+      <header className="border-b-gray5 flex items-center justify-between border-b px-2.5 py-4">
         <Link
           href="/"
           className="text-gradient text-2xl font-extrabold tracking-wide"
