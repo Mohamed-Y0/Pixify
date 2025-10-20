@@ -4,7 +4,7 @@ import { CardFooter } from "@/components/ui/card";
 import useCompress from "@/hooks/useCompress";
 
 type Props = {
-  file: File | null;
+  file: File;
   quality: number;
 };
 

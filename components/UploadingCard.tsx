@@ -6,26 +6,25 @@ import UploadArea from "@/components/UploadArea";
 import UploadedPreview from "@/components/UploadedPreview";
 import { useState, useEffect } from "react";
 import CardOptions from "@/components/CardOptions";
+import { FileInfo } from "@/types/uploadingTypes";
 
 function UploadingCard() {
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<FileInfo[]>([]);
   const [quality, setQuality] = useState<number>(75);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  console.log(files);
 
   useEffect(() => {
-    if (!file) return;
-
-    const newUrl = URL.createObjectURL(file);
-    setImageUrl(newUrl);
-
     return () => {
-      URL.revokeObjectURL(newUrl);
+      files.forEach((f) => URL.revokeObjectURL(f.url));
     };
-  }, [file]);
+  }, [files]);
 
-  const handleRemoveImage = () => {
-    setFile(null);
-    setImageUrl(null);
+  const handleRemove = (id: string) => {
+    setFiles((prev) => {
+      const removed = prev.find((f) => f.id === id);
+      if (removed) URL.revokeObjectURL(removed.url);
+      return prev.filter((f) => f.id !== id);
+    });
   };
 
   return (
@@ -34,21 +33,26 @@ function UploadingCard() {
         <CardHeader>Add an image to compress!</CardHeader>
 
         <CardContent className="flex flex-col gap-5">
-          <UploadArea onChangeFile={setFile} />
+          <UploadArea onChangeFile={setFiles} />
 
-          {imageUrl && (
-            <div className="flex items-center justify-between gap-8">
-              <UploadedPreview
-                imageUrl={imageUrl}
-                file={file}
-                onRemove={handleRemoveImage}
-              />
-              <CardOptions quality={quality} onQualityChange={setQuality} />
-            </div>
+          <div className="grid grid-cols-2 gap-2.5">
+            {files &&
+              files.map((file) => (
+                <UploadedPreview
+                  key={file.id}
+                  id={file.id}
+                  imageUrl={file.url}
+                  fileName={file.name}
+                  onRemove={handleRemove}
+                />
+              ))}
+          </div>
+          {files.length > 0 && (
+            <CardOptions quality={quality} onQualityChange={setQuality} />
           )}
         </CardContent>
 
-        <CompressButton file={file} quality={quality} />
+        {/* <CompressButton file={files} quality={quality} /> */}
       </Card>
     </div>
   );
