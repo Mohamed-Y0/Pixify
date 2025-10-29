@@ -2,22 +2,23 @@
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
 import useCompress from "@/hooks/useCompress";
+import { FileInfo } from "@/types/uploadingTypes";
 
 type Props = {
-  file: File;
+  files: FileInfo[];
   quality: number;
 };
 
-function CompressButton({ file, quality }: Props) {
-  const { compressedUrl, loading, error, compress } = useCompress();
+function CompressButton({ files, quality }: Props) {
+  const { compressedUrls, loading, error, compress } = useCompress();
 
   return (
     <>
       <CardFooter>
         <div className="border-gray2 w-full border-t pt-5 text-end">
           <Button
-            disabled={loading || !file}
-            onClick={() => file && compress(file, quality)}
+            disabled={loading || !files.length}
+            onClick={() => files && compress(files, quality)}
             className="bg-blue1 hover:bg-blue-hover cursor-pointer p-6 tracking-wider"
           >
             {loading ? "Compressing..." : "Compress"}
@@ -27,10 +28,10 @@ function CompressButton({ file, quality }: Props) {
 
       {error && <p className="mt-3 text-center text-red-500">{error}</p>}
 
-      {compressedUrl && (
+      {compressedUrls && (
         <div className="mt-5 flex justify-center">
           <img
-            src={compressedUrl}
+            src={compressedUrls}
             alt="Compressed result"
             className="max-h-60 rounded-md"
           />

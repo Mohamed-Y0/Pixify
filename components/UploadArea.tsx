@@ -41,7 +41,7 @@ function UploadArea({ onChangeFile }: Props) {
           type="file"
           id="images"
           className=""
-          multiple
+          // multiple
           hidden
           accept="image/*"
           onChange={handleFileChange}

@@ -52,7 +52,7 @@ function UploadingCard() {
           )}
         </CardContent>
 
-        {/* <CompressButton file={files} quality={quality} /> */}
+        <CompressButton files={files} quality={quality} />
       </Card>
     </div>
   );
