@@ -1,4 +1,4 @@
-# Crasher - Image Compressor
+# Pixify - Image Compressor
 
 A simple web app to upload and compress images using Next.js, TypeScript, and Sharp.
 
