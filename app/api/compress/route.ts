@@ -1,4 +1,3 @@
-import { compressImage } from "@/utils/compressImage";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
 
@@ -12,15 +11,15 @@ export async function POST(request: Request) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    const image = sharp(buffer);
 
+    const image = sharp(buffer);
     const imageFormat = (await image.metadata()).format || "jpeg";
 
-    const compressed = await compressImage(
-      buffer,
-      imageFormat,
-      Number(quality),
-    );
+    const compressed = await image
+      .toFormat(imageFormat, {
+        quality: Number(quality),
+      })
+      .toBuffer();
 
     return new NextResponse(new Uint8Array(compressed), {
       headers: { "Content-Type": `image/${imageFormat}` },
