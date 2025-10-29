@@ -9,7 +9,7 @@ export default function Home() {
             Crush. Convert. Create.
           </h1>
           <p className="max-w-3xl py-5 text-sm tracking-wider md:text-lg">
-            Crusher makes image optimization effortless — compress your files,
+            Pixify makes image optimization effortless — compress your files,
             change formats, and keep stunning quality.
           </p>
         </div>

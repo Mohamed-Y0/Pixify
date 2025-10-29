@@ -15,7 +15,7 @@ const jakaraSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Crusher",
+  title: "Pixify",
   description: "SOON ..",
 };
 

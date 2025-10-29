@@ -9,7 +9,7 @@ function Header() {
           href="/"
           className="text-gradient text-2xl font-extrabold tracking-wide"
         >
-          Crusher
+          Pixify
         </Link>
         <nav>
           <ul>
