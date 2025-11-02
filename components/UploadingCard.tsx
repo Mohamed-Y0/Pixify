@@ -4,13 +4,14 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import CompressButton from "@/components/CompressButton";
 import UploadArea from "@/components/UploadArea";
 import UploadedPreview from "@/components/UploadedPreview";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CardOptions from "@/components/CardOptions";
 import { FileInfo } from "@/types/uploadingTypes";
 
 function UploadingCard() {
   const [file, setFile] = useState<FileInfo | null>(null);
   const [quality, setQuality] = useState<number>(75);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   console.log(file);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function UploadingCard() {
 
   function handleRemove() {
     setFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
   return (
@@ -31,7 +33,7 @@ function UploadingCard() {
         <CardHeader>Add an image to compress!</CardHeader>
 
         <CardContent className="flex flex-col gap-5">
-          <UploadArea onChangeFile={setFile} />
+          <UploadArea onChangeFile={setFile} inputRef={fileInputRef} />
 
           <div className="flex items-center gap-10">
             {file && (

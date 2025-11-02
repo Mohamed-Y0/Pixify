@@ -9,9 +9,10 @@ import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   onChangeFile: Dispatch<SetStateAction<FileInfo | null>>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 
-function UploadArea({ onChangeFile }: Props) {
+function UploadArea({ onChangeFile, inputRef }: Props) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) return;
 
@@ -38,6 +39,7 @@ function UploadArea({ onChangeFile }: Props) {
         <FileUp className="text-gray2 size-12" />
         <span>Upload Your Photo</span>
         <Input
+          ref={inputRef}
           type="file"
           id="images"
           className=""
