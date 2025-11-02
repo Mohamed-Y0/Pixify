@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { FileInfo } from "@/types/uploadingTypes";
+import { useEffect, useState } from "react";
 
 function useCompress() {
-  const [compressedUrl, setCompressedUrl] = useState<string | null>(null);
+  const [compressedUrl, setCompressedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState("");
 
-  const compress = async (file: File, quality: number = 75) => {
+  useEffect(() => {
+    if (!compressedUrl)
+      return () => {
+        URL.revokeObjectURL(compressedUrl);
+      };
+  }, [compressedUrl]);
+
+  const compress = async (newfile: FileInfo, quality: number = 75) => {
     try {
       setLoading(true);
       setError("");
 
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", newfile.file);
       formData.append("quality", String(quality));
 
       const res = await fetch("/api/compress", {
@@ -30,7 +38,11 @@ function useCompress() {
     }
   };
 
-  return { compressedUrl, loading, error, compress };
+  const reset = function () {
+    setCompressedUrl("");
+  };
+
+  return { compressedUrl, loading, error, compress, reset };
 }
 
 export default useCompress;
