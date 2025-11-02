@@ -2,31 +2,31 @@
 
 import { Input } from "@/components/ui/input";
 import { FileInfo } from "@/types/uploadingTypes";
+import { getFileName } from "@/utils/getFileName";
 import { Label } from "@radix-ui/react-label";
 import { FileUp } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
-  onChangeFile: Dispatch<SetStateAction<FileInfo[]>>;
+  onChangeFile: Dispatch<SetStateAction<FileInfo | null>>;
 };
 
 function UploadArea({ onChangeFile }: Props) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
-    if (!selectedFiles) return;
+    if (!e.target.files?.[0]) return;
 
-    const files = Array.from(selectedFiles).map((file) => {
-      const newUrl = URL.createObjectURL(file);
-      return {
-        id: crypto.randomUUID(),
-        file,
-        name: file.name,
-        size: file.size,
-        url: newUrl,
-      };
+    const selectedFile = e.target.files[0];
+    console.log(selectedFile);
+
+    const newUrl = URL.createObjectURL(selectedFile);
+
+    onChangeFile({
+      id: crypto.randomUUID(),
+      file: selectedFile,
+      name: getFileName(selectedFile.name),
+      size: selectedFile.size,
+      url: newUrl,
     });
-
-    onChangeFile((prev) => [...prev, ...files]);
   };
 
   return (
@@ -41,7 +41,6 @@ function UploadArea({ onChangeFile }: Props) {
           type="file"
           id="images"
           className=""
-          // multiple
           hidden
           accept="image/*"
           onChange={handleFileChange}
