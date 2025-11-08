@@ -1,7 +1,4 @@
-import CompressedPreview from "@/components/CompressedPreview";
 import { Button } from "@/components/ui/button";
-import useCompress from "@/hooks/useCompress";
-import usePixify from "@/hooks/usePixify";
 import { FileInfo } from "@/types/uploadingTypes";
 
 type Props = {
