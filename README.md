@@ -74,16 +74,10 @@ http://localhost:3000
 
 ---
 
-## 📜 License
-
-This project is **open source** under the MIT License.
-
----
-
 ## 👤 Author
 
 Developed by **Slayver** 🧠⚡
-Learning & building tools to become a full-stack engineer.
+Learning & building tools to become an Engineer.
 
 ---
 
