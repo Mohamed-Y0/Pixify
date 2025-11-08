@@ -4,28 +4,23 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import CompressButton from "@/components/CompressButton";
 import UploadArea from "@/components/UploadArea";
 import UploadedPreview from "@/components/UploadedPreview";
-import { useState, useEffect, useRef } from "react";
 import CardOptions from "@/components/CardOptions";
-import { FileInfo } from "@/types/uploadingTypes";
+import usePixify from "@/hooks/usePixify";
+import CompressedPreview from "@/components/CompressedPreview";
 
 function UploadingCard() {
-  const [file, setFile] = useState<FileInfo | null>(null);
-  const [quality, setQuality] = useState<number>(75);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  console.log(file);
-
-  useEffect(() => {
-    if (!file) return;
-
-    return () => {
-      URL.revokeObjectURL(file.url);
-    };
-  }, [file]);
-
-  function handleRemove() {
-    setFile(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  }
+  const {
+    file,
+    setFile,
+    fileRef,
+    quality,
+    setQuality,
+    removeFile,
+    compressedUrl,
+    loading,
+    compress,
+    error,
+  } = usePixify();
 
   return (
     <div className="flex justify-center text-sm md:text-lg">
@@ -33,25 +28,37 @@ function UploadingCard() {
         <CardHeader>Add an image to compress!</CardHeader>
 
         <CardContent className="flex flex-col gap-5">
-          <UploadArea onChangeFile={setFile} inputRef={fileInputRef} />
+          <UploadArea onChangeFile={setFile} inputRef={fileRef} />
 
-          <div className="flex items-center gap-10">
-            {file && (
-              <UploadedPreview
-                key={file.id}
-                size={file.file.size}
-                imageUrl={file.url}
-                fileName={file.name}
-                onRemove={handleRemove}
+          {file && (
+            <>
+              <div className="flex items-center gap-10">
+                <UploadedPreview
+                  key={file.id}
+                  size={file.file.size}
+                  imageUrl={file.url}
+                  fileName={file.name}
+                  onRemove={removeFile}
+                />
+
+                <CardOptions quality={quality} onQualityChange={setQuality} />
+              </div>
+
+              <CompressButton
+                file={file}
+                quality={quality}
+                loading={loading}
+                error={error}
+                compress={compress}
               />
-            )}
-            {file && (
-              <CardOptions quality={quality} onQualityChange={setQuality} />
-            )}
-          </div>
+            </>
+          )}
+          {compressedUrl && file && (
+            <div className="flex max-w-40 gap-2.5 px-5">
+              <CompressedPreview url={compressedUrl} name={file.name} />
+            </div>
+          )}
         </CardContent>
-
-        {file && <CompressButton file={file} quality={quality} />}
       </Card>
     </div>
   );

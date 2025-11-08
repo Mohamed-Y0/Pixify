@@ -2,7 +2,6 @@
 
 import { Input } from "@/components/ui/input";
 import { FileInfo } from "@/types/uploadingTypes";
-import { getFileName } from "@/utils/getFileName";
 import { Label } from "@radix-ui/react-label";
 import { FileUp } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
@@ -24,7 +23,7 @@ function UploadArea({ onChangeFile, inputRef }: Props) {
     onChangeFile({
       id: crypto.randomUUID(),
       file: selectedFile,
-      name: getFileName(selectedFile.name),
+      name: selectedFile.name,
       size: selectedFile.size,
       url: newUrl,
     });
