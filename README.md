@@ -68,6 +68,7 @@ http://localhost:3000
 
 - ✅ Initial UI
 - ✅ Single-file compression
+- ⏳ Change Formats
 - ⏳ Drag & Drop uploads
 - ⏳ Multi-image compression support & Download ZIP support
 
