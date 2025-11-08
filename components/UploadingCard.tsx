@@ -7,6 +7,7 @@ import UploadedPreview from "@/components/UploadedPreview";
 import CardOptions from "@/components/CardOptions";
 import usePixify from "@/hooks/usePixify";
 import CompressedPreview from "@/components/CompressedPreview";
+import { FileInfo } from "@/types/uploadingTypes";
 
 function UploadingCard() {
   const {
@@ -15,11 +16,11 @@ function UploadingCard() {
     fileRef,
     quality,
     setQuality,
-    removeFile,
     compressedUrl,
     loading,
     compress,
     error,
+    resetAll,
   } = usePixify();
 
   return (
@@ -38,7 +39,7 @@ function UploadingCard() {
                   size={file.file.size}
                   imageUrl={file.url}
                   fileName={file.name}
-                  onRemove={removeFile}
+                  onRemove={resetAll}
                 />
 
                 <CardOptions quality={quality} onQualityChange={setQuality} />
@@ -53,9 +54,9 @@ function UploadingCard() {
               />
             </>
           )}
-          {compressedUrl && file && (
+          {compressedUrl && (
             <div className="flex max-w-40 gap-2.5 px-5">
-              <CompressedPreview url={compressedUrl} name={file.name} />
+              <CompressedPreview url={compressedUrl} file={file as FileInfo} />
             </div>
           )}
         </CardContent>

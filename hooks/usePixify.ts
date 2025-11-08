@@ -7,6 +7,12 @@ function usePixify() {
   const { quality, setQuality } = useFileControl();
   const { compress, loading, error, compressedUrl, reset } = useCompress();
 
+  function resetAll() {
+    reset();
+    removeFile();
+    setQuality(75);
+  }
+
   return {
     file,
     setFile,
@@ -17,8 +23,7 @@ function usePixify() {
     error,
     compress,
     compressedUrl,
-    removeFile,
-    reset,
+    resetAll,
   };
 }
 
