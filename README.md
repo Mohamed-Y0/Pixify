@@ -7,7 +7,7 @@ The goal is to provide a fast, secure, and modern web tool for creators, develop
 ✅ **Currently supports single-image compression**
 🛠️ **Multi-image compression coming soon!**
 
-Anyone can download, contribute, and self-host Pixify.
+Anyone can download, and self-host Pixify.
 
 ---
 
