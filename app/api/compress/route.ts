@@ -1,4 +1,4 @@
-import { qualityToPngLevel } from "@/utils/qualityToPngLevel";
+import { qualityToPngLevel } from "@/utils/helpers";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
 

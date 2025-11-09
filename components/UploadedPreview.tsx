@@ -1,4 +1,4 @@
-import { formatFileSize } from "@/utils/formatFileSize";
+import { formatFileSize } from "@/utils/helpers";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 

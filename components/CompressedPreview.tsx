@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { FileInfo } from "@/types/uploadingTypes";
-import { getFileName } from "@/utils/getFileName";
+import { getFileName } from "@/utils/helpers";
 import Link from "next/link";
 
 type Props = {
