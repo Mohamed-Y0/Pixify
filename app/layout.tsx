@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
+import { Separator } from "@/components/ui/separator";
 
 const jakaraSans = localFont({
   src: [
@@ -26,12 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${jakaraSans.className} !bg-bg-color container m-auto !text-white antialiased`}
-      >
+      <body className={`${jakaraSans.className} container m-auto antialiased`}>
         <div className="flex h-screen flex-col">
-          <Header />
           <main className="flex-1">{children}</main>
+          <Separator />
           <p className="text-gray7 py-4 text-center tracking-wider">
             Created By Mohamed Ahmed
           </p>

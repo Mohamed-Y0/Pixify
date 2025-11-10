@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { FileInfo } from "@/types/uploadingTypes";
 import { Label } from "@radix-ui/react-label";
-import { FileUp } from "lucide-react";
+import { LucideFileUp } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -33,9 +33,9 @@ function UploadArea({ onChangeFile, inputRef }: Props) {
     <>
       <Label
         htmlFor="images"
-        className="border-gray2 bg-bg-color text-gray1 flex min-h-50 flex-col items-center justify-center gap-5 rounded-md border border-dashed text-sm md:text-lg"
+        className="border-gray2 bg-bg-color text-gray1 flex min-h-50 flex-col items-center justify-center gap-5 rounded border border-dashed text-sm md:text-lg"
       >
-        <FileUp className="text-gray2 size-12" />
+        <LucideFileUp className="text-gray2 size-12" />
         <span>Upload Your Photo</span>
         <Input
           ref={inputRef}

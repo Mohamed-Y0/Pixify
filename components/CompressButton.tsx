@@ -16,7 +16,8 @@ function CompressButton({ file, quality, loading, error, compress }: Props) {
         <Button
           disabled={loading || !file}
           onClick={() => file && compress(file, quality)}
-          className="bg-blue1 hover:bg-blue-hover cursor-pointer p-6 tracking-wider"
+          className="cursor-pointer p-6 tracking-wider"
+          variant={"outline"}
         >
           {loading ? "Compressing..." : "Compress"}
         </Button>
