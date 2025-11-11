@@ -3,15 +3,13 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Separator } from "@/components/ui/separator";
 
-const jakaraSans = localFont({
-  src: [
-    {
-      path: "./fonts/PlusJakartaSans-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-jakaraSans",
+const Zodiak = localFont({
+  src: "./fonts/CabinetGrotesk-Medium.woff2",
+});
+
+const Telma = localFont({
+  src: "./fonts/Telma-Regular.woff2",
+  variable: "--font-temla",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jakaraSans.className} container m-auto antialiased`}>
+      <body
+        className={`${Zodiak.className} ${Telma.variable} container m-auto antialiased`}
+      >
         <div className="flex h-screen flex-col">
           <main className="flex-1">{children}</main>
           <Separator />
