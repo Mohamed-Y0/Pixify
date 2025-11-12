@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import LoadingButton from "@/components/ui/LoadingButton";
 import { FileInfo } from "@/types/uploadingTypes";
 
 type Props = {
@@ -19,7 +20,7 @@ function CompressButton({ file, quality, loading, error, compress }: Props) {
           className="cursor-pointer p-6 text-lg tracking-wider"
           variant={"default"}
         >
-          {loading ? "Compressing..." : "Compress"}
+          {loading ? <LoadingButton stat="Compressing" /> : "Compress"}
         </Button>
       </div>
 
