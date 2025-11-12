@@ -28,9 +28,9 @@ export default function RootLayout({
         className={`${Zodiak.className} ${Telma.variable} container m-auto antialiased`}
       >
         <div className="flex h-screen flex-col">
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 px-10">{children}</main>
           <Separator />
-          <p className="text-gray7 py-4 text-center tracking-wider">
+          <p className="text-gray7 py-5 text-center tracking-wider">
             Created By Mohamed Ahmed
           </p>
         </div>
