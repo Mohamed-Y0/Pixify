@@ -25,7 +25,7 @@ function UploadingCard() {
 
   return (
     <div className="flex justify-center text-sm md:text-lg">
-      <Card className="bg-gray5 w-full max-w-2xl divide-red-50 border-0">
+      <Card className="bg-gray5 w-full max-w-2xl">
         <CardHeader>Add an image to compress!</CardHeader>
 
         <CardContent className="flex flex-col gap-5">

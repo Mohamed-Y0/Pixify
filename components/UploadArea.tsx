@@ -33,9 +33,9 @@ function UploadArea({ onChangeFile, inputRef }: Props) {
     <>
       <Label
         htmlFor="images"
-        className="border-gray2 bg-bg-color text-gray1 flex min-h-50 flex-col items-center justify-center gap-5 rounded border border-dashed text-sm md:text-lg"
+        className="flex min-h-50 flex-col items-center justify-center gap-5 rounded border border-dashed text-sm md:text-lg"
       >
-        <LucideFileUp className="text-gray2 size-12" />
+        <LucideFileUp className="size-12" />
         <span>Upload Your Photo</span>
         <Input
           ref={inputRef}
