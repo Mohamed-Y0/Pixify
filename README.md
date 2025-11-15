@@ -1,4 +1,4 @@
-# 📸 Pixify — Smart Image Compression Tool (Underdevelopment)
+# 📸 Pixify — Smart Image Compression Tool
 
 Pixify is an open-source image compression tool built with **Next.js**, designed to reduce image sizes while maintaining high visual quality.
 The goal is to provide a fast, secure, and modern web tool for creators, developers, and designers to compress images effortlessly.
@@ -68,9 +68,9 @@ http://localhost:3000
 
 - ✅ Initial UI
 - ✅ Single-file compression
-- ⏳ Writing Documentaions (Working On It)
-- ⏳ Change Image Formats
-- ⏳ Improve The UI
+- ✅ Writing Documentaions
+- ✅ Change Image Formats
+- ✅ Improve The UI
 - ⏳ Drag & Drop uploads
 - ⏳ Multi-image compression support & Download ZIP support
 
