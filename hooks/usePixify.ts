@@ -4,8 +4,13 @@ import useFileUpload from "@/hooks/useFileUpload";
 
 function usePixify() {
   const { file, setFile, fileRef, removeFile } = useFileUpload();
-  const { quality, setQuality } = useFileControl();
-  const { compress, loading, error, compressedUrl, reset } = useCompress();
+  const { quality, setQuality, format, setFormat } = useFileControl();
+  const { compressFn, loading, error, compressedUrl, reset } = useCompress();
+
+  function compress() {
+    if (!file) return;
+    compressFn(file, quality, format);
+  }
 
   function resetAll() {
     reset();
@@ -24,6 +29,8 @@ function usePixify() {
     compress,
     compressedUrl,
     resetAll,
+    format,
+    setFormat,
   };
 }
 

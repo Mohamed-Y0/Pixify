@@ -8,6 +8,8 @@ import CardOptions from "@/components/CardOptions";
 import usePixify from "@/hooks/usePixify";
 import CompressedPreview from "@/components/CompressedPreview";
 import { FileInfo } from "@/types/uploadingTypes";
+import { Separator } from "@/components/ui/separator";
+import ClearButton from "@/components/ClearButton";
 
 function UploadingCard() {
   const {
@@ -21,11 +23,13 @@ function UploadingCard() {
     compress,
     error,
     resetAll,
+    format,
+    setFormat,
   } = usePixify();
 
   return (
     <div className="flex justify-center text-sm md:text-lg">
-      <Card className="w-full max-w-2xl">
+      <Card className="w-full max-w-4xl">
         <CardHeader>Add an image to compress!</CardHeader>
 
         <CardContent className="flex flex-col gap-5">
@@ -33,31 +37,37 @@ function UploadingCard() {
 
           {file && (
             <>
-              <div className="flex items-center gap-10">
-                <UploadedPreview
-                  key={file.id}
-                  size={file.file.size}
-                  imageUrl={file.url}
-                  fileName={file.name}
-                  onRemove={resetAll}
+              <UploadedPreview
+                key={file.id}
+                size={file.file.size}
+                imageUrl={file.url}
+                fileName={file.name}
+                // onRemove={resetAll}
+              />
+
+              <Separator />
+
+              <div className="flex flex-wrap items-center justify-center gap-2.5 sm:flex-nowrap sm:justify-between">
+                <CardOptions
+                  quality={quality}
+                  onQualityChange={setQuality}
+                  format={format}
+                  onChangeFormat={setFormat}
                 />
 
-                <CardOptions quality={quality} onQualityChange={setQuality} />
-              </div>
+                <ClearButton onClear={resetAll} />
 
-              <CompressButton
-                file={file}
-                quality={quality}
-                loading={loading}
-                error={error}
-                compress={compress}
-              />
+                <CompressButton
+                  loading={loading}
+                  error={error}
+                  compress={compress}
+                />
+              </div>
             </>
           )}
+
           {compressedUrl && (
-            <div className="flex max-w-40 gap-2.5 px-5">
-              <CompressedPreview url={compressedUrl} file={file as FileInfo} />
-            </div>
+            <CompressedPreview url={compressedUrl} file={file as FileInfo} />
           )}
         </CardContent>
       </Card>

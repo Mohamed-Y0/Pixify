@@ -2,12 +2,15 @@ import { qualityToPngLevel } from "@/utils/helpers";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
 
+type SharpFormat = keyof sharp.FormatEnum;
+
 export async function POST(request: Request) {
   try {
     // get the data from formData
     const formData = await request.formData();
     const file = formData.get("file") as File;
-    const quality = formData.get("quality") || 75;
+    const quality = Number(formData.get("quality")) || 75;
+    const rawFormat = formData.get("format") as string | null;
 
     if (!file) return NextResponse.json({ error: "No files" }, { status: 400 });
 
@@ -16,14 +19,20 @@ export async function POST(request: Request) {
 
     const image = sharp(buffer);
     // in case the image is .jpg because sharp doesn't support .jpg type
-    const imageFormat = (await image.metadata()).format || "jpeg";
+    const allowedFormats: SharpFormat[] = ["jpeg", "png", "webp", "avif"];
+
+    const imageFormat: SharpFormat =
+      (typeof rawFormat === "string" &&
+        allowedFormats.includes(rawFormat as SharpFormat) &&
+        (rawFormat as SharpFormat)) ||
+      "jpeg";
 
     // Compress the image to the same format (change format is not available now)
     const compressed = await image
       .toFormat(imageFormat, {
         // Change 'quality' from string to number (all data in the formData is string)
         // This line work in case the format is not .png
-        quality: Number(quality),
+        quality,
 
         // compressionLevel is for .png
         // We send the quality to helper function because compressionLevel is from 0 to 9

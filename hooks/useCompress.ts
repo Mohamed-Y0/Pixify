@@ -13,7 +13,11 @@ function useCompress() {
       };
   }, [compressedUrl]);
 
-  const compress = async (newfile: FileInfo, quality: number = 75) => {
+  const compressFn = async (
+    newfile: FileInfo,
+    quality: number = 75,
+    format: string,
+  ) => {
     try {
       setLoading(true);
       setError("");
@@ -21,6 +25,7 @@ function useCompress() {
       const formData = new FormData();
       formData.append("file", newfile.file);
       formData.append("quality", String(quality));
+      formData.append("format", format);
 
       const res = await fetch("/api/compress", {
         method: "POST",
@@ -42,7 +47,7 @@ function useCompress() {
     setCompressedUrl("");
   };
 
-  return { compressedUrl, loading, error, compress, reset };
+  return { compressedUrl, loading, error, compressFn, reset };
 }
 
 export default useCompress;

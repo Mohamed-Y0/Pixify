@@ -1,26 +1,30 @@
 import { Button } from "@/components/ui/button";
-import LoadingButton from "@/components/ui/LoadingButton";
-import { FileInfo } from "@/types/uploadingTypes";
+import { LucideCheck } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 type Props = {
-  file: FileInfo;
-  quality: number;
   loading: boolean;
   error: string;
-  compress: (newFile: FileInfo, quality: number) => void;
+  compress: () => void;
 };
 
-function CompressButton({ file, quality, loading, error, compress }: Props) {
+function CompressButton({ loading, error, compress }: Props) {
   return (
     <>
-      <div className="border-gray2 w-full border-t pt-5 text-end">
+      <div className="self-end">
         <Button
-          disabled={loading || !file}
-          onClick={() => file && compress(file, quality)}
-          className="cursor-pointer p-6 text-lg tracking-wider"
+          disabled={loading}
+          size={"icon"}
+          onClick={compress}
+          type="submit"
+          className="cursor-pointer p-5"
           variant={"default"}
         >
-          {loading ? <LoadingButton stat="Compressing" /> : "Compress"}
+          {loading ? (
+            <Spinner className="size-5" />
+          ) : (
+            <LucideCheck className="size-5" />
+          )}
         </Button>
       </div>
 

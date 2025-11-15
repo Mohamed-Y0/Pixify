@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import { Separator } from "@/components/ui/separator";
 import { FileInfo } from "@/types/uploadingTypes";
-import { getFileName } from "@/utils/helpers";
+import { formatFileSize, getFileName } from "@/utils/helpers";
 import Link from "next/link";
 
 type Props = {
@@ -10,15 +11,22 @@ type Props = {
 
 function CompressedPreview({ url, file }: Props) {
   return (
-    <div className="flex items-center gap-5">
-      <img src={url} alt="Compressed result" className="max-h-30 rounded-md" />
-      <div>
+    <>
+      <Separator />
+
+      <div className="flex max-h-15 w-1/2 items-center gap-2.5 overflow-hidden rounded-lg border py-5">
+        <img height={100} width={100} src={url} alt="Compressed result" />
+
+        <div className="flex flex-col truncate">
+          <p className="text-sm">{getFileName(file.name)}</p>
+          <span className="text-[10px]">{formatFileSize(file.size)}</span>
+        </div>
+
         <Link href={url} download={`${getFileName(file.name)}-pixify`}>
           Download
         </Link>
-        <p>{file.name}</p>
       </div>
-    </div>
+    </>
   );
 }
 

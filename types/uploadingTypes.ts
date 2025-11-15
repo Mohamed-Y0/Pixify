@@ -1,6 +1,6 @@
 export type FileInfo = {
   id: string;
-  file: File;
+  file: Blob;
   name: string;
   size: number;
   url: string;
