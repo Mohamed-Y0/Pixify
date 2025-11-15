@@ -18,14 +18,13 @@ function CompressedPreview({ url, file }: Props) {
       <div className="flex items-center justify-between">
         <div className="flex max-h-15 w-1/2 items-center gap-2.5 overflow-hidden rounded-lg border py-5">
           <img height={100} width={100} src={url} alt="Compressed result" />
-
           <div className="flex flex-col truncate">
             <p className="text-sm">{getFileName(file.name)}</p>
-            <span className="text-[10px]">{formatFileSize(file.size)}</span>
+            {/* <span className="text-[10px]">{formatFileSize(file.size)}</span> */}
           </div>
         </div>
 
-        <Button asChild className="p-5">
+        <Button asChild>
           <Link href={url} download={`${getFileName(file.name)}-pixify`}>
             <LucideDownload className="size-5" />
           </Link>
